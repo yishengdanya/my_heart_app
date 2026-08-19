@@ -24,8 +24,7 @@ android.gradle_dependencies = []
 android.memory_size = 512
 android.ndk_api = 24
 android.jobs = 1
-# 核心修复：强制从源码编译，解决“不支持的wheel平台”报错
-android.p4a_arguments = --prefer-binary
+# （注意：这里去掉了 android.p4a_arguments = --prefer-binary）
 
 [buildozer]
 log_level = 2
