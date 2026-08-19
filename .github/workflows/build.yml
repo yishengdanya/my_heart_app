@@ -1,15 +1,18 @@
-name: Build APK
+name: Build APK with Official Docker
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          buildozer_file: buildozer.spec
-          buildozer_command: android debug
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build APK using Official Docker
+        run: |
+          docker run --rm \
+          -v ${{ github.workspace }}:/home/user/hostcwd \
+          kivy/buildozer android debug
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
