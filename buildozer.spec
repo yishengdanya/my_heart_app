@@ -1,36 +1,31 @@
-[app]
-title = HeartPopup
-package.name = com.yourname.heartpopup
-package.domain = com.yourname
-source.dir = .
-source.include_exts = py,png,jpg,kv,atlas
-version = 0.1
+name: Build APK
+on: [push]
 
-# 🟢 绝杀修复：严格指定 Python 3.10.0，禁用 3.11/3.12！
-requirements = python3==3.10.0,kivy==2.2.1,cython==3.0.10
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 2.1.0
-fullscreen = 0
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-# ---------- 权限与SDK ----------
-android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
-android.api = 30
-# 🔴 25b 是正确的 NDK
-android.ndk = 25b
-android.accept_sdk_license = True
-android.archs = arm64-v8a, armeabi-v7a
-android.gradle_dependencies = []
+      - name: Install Buildozer and Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+          pip install --user --upgrade buildozer cython==3.0.10
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-# ---------- 编译资源优化 ----------
-android.memory_size = 4096
-android.ndk_api = 24
-android.jobs = 2
+      - name: Build APK with Buildozer
+        run: |
+          buildozer android debug
 
-# 🟢 传递 Python 版本参数给 p4a，双重保险
-android.p4a_arguments = --python-version 3.10
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: bin/*.apk
