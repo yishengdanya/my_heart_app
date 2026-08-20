@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 核心修复：Kivy 2.2.1 搭配 Cython 3.0.10，这是避坑的黄金组合
-requirements = python3,kivy==2.2.1,cython==3.0.10
+# 🟢 最终绝杀：锁定 Python 3.11，升级 Kivy 2.3.1，彻底避开 cgi 缺失的坑！
+requirements = python3==3.11.9,kivy==2.3.1,cython==3.0.10
 
 orientation = portrait
 osx.python_version = 3
@@ -17,7 +17,6 @@ fullscreen = 0
 # ---------- 权限与SDK ----------
 android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
 android.api = 30
-# 这里锁定为 25b，因为工具强制要求 NDK 版本 >= 25
 android.ndk = 25b
 android.sdk = 30
 android.accept_sdk_license = True
@@ -29,7 +28,7 @@ android.memory_size = 2048
 android.ndk_api = 24
 android.jobs = 2
 
-# 🔴 绝对不要动这一行，保持后面完全空着！
+# 🟢 绝对不能有任何参数，留空
 android.p4a_arguments = 
 
 [buildozer]
