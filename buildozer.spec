@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 🟢 终极绝杀：不锁定Python版本（避免和容器环境冲突），直接拉取Kivy官方最新源码分支（内含Python 3.14的cgi补丁）
-requirements = python3,kivy @ git+https://github.com/kivy/kivy.git@master,cython
+# 🟢 绝杀锁定：不指定Python版本，锁定Kivy 2.2.1 和 Cython 3.0.10 防编译塌方
+requirements = python3,kivy==2.2.1,cython==3.0.10
 
 orientation = portrait
 osx.python_version = 3
@@ -17,18 +17,21 @@ fullscreen = 0
 # ---------- 权限与SDK ----------
 android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
 android.api = 30
+# 🔴 满足工具最低要求的 NDK 版本
 android.ndk = 25b
-android.sdk = 30
+# android.sdk 已废弃，在此处删除
 android.accept_sdk_license = True
 android.archs = arm64-v8a, armeabi-v7a
 android.gradle_dependencies = []
 
 # ---------- 编译资源优化 ----------
-android.memory_size = 2048
+# 内存加大，防被杀
+android.memory_size = 4096
 android.ndk_api = 24
+# 注意：这里的 jobs 后面会被环境变量覆盖，写多少都行
 android.jobs = 2
 
-# 🟢 绝不能有任何多余参数，保持空置
+# 🟢 保持空置，绝不能再写 --no-deps 等参数
 android.p4a_arguments = 
 
 [buildozer]
