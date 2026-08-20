@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 🟢 最终绝杀：锁定 Python 3.11，升级 Kivy 2.3.1，彻底避开 cgi 缺失的坑！
-requirements = python3==3.11.9,kivy==2.3.1,cython==3.0.10
+# 🟢 终极绝杀：不锁定Python版本（避免和容器环境冲突），直接拉取Kivy官方最新源码分支（内含Python 3.14的cgi补丁）
+requirements = python3,kivy @ git+https://github.com/kivy/kivy.git@master,cython
 
 orientation = portrait
 osx.python_version = 3
@@ -28,7 +28,7 @@ android.memory_size = 2048
 android.ndk_api = 24
 android.jobs = 2
 
-# 🟢 绝对不能有任何参数，留空
+# 🟢 绝不能有任何多余参数，保持空置
 android.p4a_arguments = 
 
 [buildozer]
