@@ -24,7 +24,9 @@ android.gradle_dependencies = []
 android.memory_size = 512
 android.ndk_api = 24
 android.jobs = 1
-# （注意：这里去掉了 android.p4a_arguments = --prefer-binary）
+
+# 🟢 新增：彻底打断 pip 越界寻找包的环节
+android.p4a_arguments = --no-deps --ignore-setup-py
 
 [buildozer]
 log_level = 2
