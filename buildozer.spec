@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 核心修复：移除 --no-deps 后，必须显式加上 cython 依赖以支持编译
-requirements = python3,kivy,cython
+# 核心修复：锁定极稳定版本组合，彻底解决 expected 6 have 5 编译崩溃
+requirements = python3,kivy==2.2.1,cython==3.0.10
 
 orientation = portrait
 osx.python_version = 3
@@ -17,19 +17,19 @@ fullscreen = 0
 # ---------- 权限与SDK ----------
 android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
 android.api = 30
-android.ndk = 25b
+# 修复：从 25b 降级为 23b，避开 NDK 与 Python3.14 的交叉编译冲突
+android.ndk = 23b
 android.sdk = 30
 android.accept_sdk_license = True
 android.archs = arm64-v8a, armeabi-v7a
 android.gradle_dependencies = []
 
-# ---------- 内存和线程 ----------
+# ---------- 编译资源优化 ----------
 android.memory_size = 2048
 android.ndk_api = 24
 android.jobs = 2
 
-# 🟢 必看：之前导致失败的元凶就是这个参数！
-# 请保证这一行后面绝对没有任何内容，留空即可！
+# 🟢 绝对关键：此参数必须绝对留空！不要再填任何内容！
 android.p4a_arguments = 
 
 [buildozer]
