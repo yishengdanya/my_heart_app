@@ -346,7 +346,7 @@ class HeartApp(App):
 
         self.root_layout.add_widget(control_box)
 
-        # 启动时自动运行一次（可选，若不想自动运行可注释掉）
+        # 启动时自动运行一次
         Clock.schedule_once(lambda dt: self.start_animation(None), 0.5)
 
         return self.root_layout
