@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 🟢 锁定 Python 3.10.0 以及 Kivy/Cython 版本
-requirements = python3==3.10.0,kivy==2.2.1,cython==3.0.10
+# 🟢 修复 requirements：不再指定 python3 版本号，改为用 p4a 参数控制
+requirements = python3,kivy==2.2.1,cython==3.0.10
 
 orientation = portrait
 osx.python_version = 3

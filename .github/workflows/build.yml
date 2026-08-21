@@ -3,7 +3,11 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04  # 🟢 使用最稳定的 20.04 系统，100% 规避缺失包报错
+    runs-on: ubuntu-latest          # 改用 ubuntu-latest，避免 runner 短缺
+    timeout-minutes: 30            # 限制构建时长，防止无限排队
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: true    # 新提交自动取消旧构建，释放队列
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
