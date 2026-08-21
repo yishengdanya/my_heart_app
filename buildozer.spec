@@ -6,8 +6,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# 🟢 修复 requirements：不再指定 python3 版本号，改为用 p4a 参数控制
-requirements = python3,kivy==2.2.1,cython==3.0.10
+# ✅ 锁定 Python 3.10.0，防止下载 3.14 导致编译失败
+requirements = python3==3.10.0,kivy==2.2.1,cython==3.0.10
 
 orientation = portrait
 osx.python_version = 3
@@ -26,7 +26,8 @@ android.gradle_dependencies = []
 android.memory_size = 4096
 android.ndk_api = 24
 android.jobs = 2
-android.p4a_arguments = --python-version 3.10
+# 删掉或注释掉这行，避免版本冲突
+# android.p4a_arguments = --python-version 3.10
 
 [buildozer]
 log_level = 2
